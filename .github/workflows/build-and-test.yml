@@ -1,5 +1,10 @@
 name: .NET Core
 
+env:
+  registry: kmg88devopsreg.azurecr.io
+  repository: wth/dotnetcore
+  docker_path: Application/aspnet-core-dotnet-core
+
 on:
   push:
     branches: [ main ]
@@ -25,3 +30,17 @@ jobs:
       run: dotnet build ./Application/aspnet-core-dotnet-core/aspnet-core-dotnet-core.csproj --configuration Release --no-restore
     - name: Test
       run: dotnet test ./Application/aspnet-core-dotnet-core.UnitTests/aspnet-core-dotnet-core.UnitTests.csproj --no-restore --verbosity normal
+
+  docker-build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+          - uses: actions/checkout@v2
+
+          - name: Docker login     
+            run: docker login $registry -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+
+          - name: Docker build
+            run: docker build -t $registry/$repository:${{github.run_number}} --build-arg build_version=${{github.run_number}} $docker_path
+
+          - name: Docker Push
+            run: docker push $registry/$repository:${{github.run_number}} 
