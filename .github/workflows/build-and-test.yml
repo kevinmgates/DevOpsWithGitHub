@@ -56,7 +56,7 @@ jobs:
           password: ${{ secrets.ACR_PASSWORD }}
           registry: kmg88devopsreg.azurecr.io
           repository: wth/dotnetcore
-          dockerfile: Application/aspnet-core-dotnet-core
+          dockerfile: Application/aspnet-core-dotnet-core/Dockerfile
           tags: ${{github.run_number}}
         
       - uses: actions/github-script@0.9.0
