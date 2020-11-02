@@ -48,16 +48,32 @@ jobs:
       #- name: Docker Push
       #  run: docker push $registry/$repository:$tag
        
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v1
+      #- name: Build and push Docker images
+      #  uses: docker/build-push-action@v1
+      #  with:
+      #    username: ${{ secrets.ACR_USERNAME }}
+      #    password: ${{ secrets.ACR_PASSWORD }}
+      #    registry: ${{ secrets.ACR_NAME }}
+      #    repository: wth/dotnetcore
+      #    dockerfile: ./Application/aspnet-core-dotnet-core/Dockerfile
+      #    tags: ${{ github.run_number }}
+      
+      - name: Azure Container Registry Login
+        uses: Azure/docker-login@v1
         with:
+          # Container registry username
           username: ${{ secrets.ACR_USERNAME }}
+          # Container registry password
           password: ${{ secrets.ACR_PASSWORD }}
-          registry: ${{ secrets.ACR_NAME }}
-          repository: wth/dotnetcore
-          dockerfile: ./Application/aspnet-core-dotnet-core/Dockerfile
-          tags: ${{ github.run_number }}
-          
+          # Container registry server url
+          login-server: ${{ secrets.ACR_NAME }}
+
+      - name: Docker build
+        run: docker build -t ${{ secrets.ACR_NAME }}/$repository:$tag --build-arg build_version=$tag $dockerfile_path
+
+      - name: Docker Push
+        run: docker push ${{ secrets.ACR_NAME }}/$repository:$tag
+        
       - uses: actions/github-script@0.9.0
         if: failure()
         with:
