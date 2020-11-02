@@ -47,4 +47,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: kmg88devopsreg.azurecr.io/app:${{ GITHUB_RUN_NUMBER }}
+          tags: kmg88devopsreg.azurecr.io/app:v1
