@@ -4,6 +4,7 @@ env:
   registry: kmg88devopsreg.azurecr.io
   repository: wth/dotnetcore
   dockerfile_path: Application/aspnet-core-dotnet-core
+  tag: ${{github.run_number}} 
 
 on:
   push:
@@ -38,14 +39,23 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Docker login     
-        run: docker login $registry -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+      #- name: Docker login     
+      #  run: docker login $registry -u ${{ secrets.ACR_USERNAME }} -p ${{ secrets.ACR_PASSWORD }}
 
-      - name: Docker build
-        run: docker build -t $registry/$repository:${{github.run_number}} --build-arg build_version=${{github.run_number}} $dockerfile_path
+      #- name: Docker build
+      #  run: docker build -t $registry/$repository:$tag --build-arg build_version=$tag $dockerfile_path
 
-      - name: Docker Push
-        run: docker push $registry/$repository:${{github.run_number}} 
+      #- name: Docker Push
+      #  run: docker push $registry/$repository:$tag
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+          registry: $registry
+          repository: $repository
+          dockerfile: $dockerfile_path
+          tags: $tag
         
       - uses: actions/github-script@0.9.0
         if: failure()
