@@ -3,7 +3,7 @@ name: .NET Core
 env:
   registry: kmg88devopsreg.azurecr.io
   repository: wth/dotnetcore
-  docker_path: Application/aspnet-core-dotnet-core
+  dockerfile_path: Application/aspnet-core-dotnet-core
 
 on:
   push:
@@ -42,7 +42,7 @@ jobs:
         run: docker login $registry -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Docker build
-        run: docker build -t $registry/$repository:${{github.run_number}} --build-arg build_version=${{github.run_number}} $docker_path
+        run: docker build -t $registry/$repository:${{github.run_number}} --build-arg build_version=${{github.run_number}} $dockerfile_path
 
       - name: Docker Push
         run: docker push $registry/$repository:${{github.run_number}} 
