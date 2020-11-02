@@ -41,23 +41,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      #- name: Docker login     
-      #  run: docker login $registry -u ${{ secrets.ACR_USERNAME }} -p ${{ secrets.ACR_PASSWORD }}
+      - name: Docker login     
+        run: docker login $registry -u ${{ secrets.ACR_USERNAME }} -p ${{ secrets.ACR_PASSWORD }}
 
-      #- name: Docker build
-      #  run: docker build -t $registry/$repository:$tag --build-arg build_version=$tag $dockerfile_path
+      - name: Docker build
+        run: docker build -t $registry/$repository:$tag --build-arg build_version=$tag $dockerfile_path
 
-      #- name: Docker Push
-      #  run: docker push $registry/$repository:$tag
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
-          registry: kmg88devopsreg.azurecr.io
-          repository: wth/dotnetcore
-          dockerfile: Application/aspnet-core-dotnet-core/Dockerfile
-          tags: ${{github.run_number}}
+      - name: Docker Push
+        run: docker push $registry/$repository:$tag
+      
         
       - uses: actions/github-script@0.9.0
         if: failure()
