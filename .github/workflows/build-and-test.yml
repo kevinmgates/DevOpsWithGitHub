@@ -56,7 +56,7 @@ jobs:
           registry: ${{ secrets.ACR_NAME }}
           repository: wth/dotnetcore
           dockerfile: ./Application/aspnet-core-dotnet-core/Dockerfile
-          tags: ${{ GITHUB_RUN_NUMBER }}
+          tags: ${{ github.run_number }}
           
       - uses: actions/github-script@0.9.0
         if: failure()
