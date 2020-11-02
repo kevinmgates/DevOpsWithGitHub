@@ -1,22 +1,22 @@
-name: .NET Core
+name: CI
 
 env:
-  registry: ${{ secrets.ACR_NAME }}
-  repository: wth/dotnetcoreapp
-  dockerfile_path: Application/aspnet-core-dotnet-core
-  tag: ${{github.run_number}} 
+  registryName: kmg88devopsreg.azurecr.io
+  repositoryName: wth/dotnetcoreapp
+  dockerfilePath: Application/aspnet-core-dotnet-core
+  tag: ${{github.run_number}}
 
 on:
   push:
     branches: [ main ]
     paths:
     - 'Application/**'
-    - '.github/workflows/build-and-test.yml'
+    - '.github/workflows/ci.yml'
   pull_request:
     branches: [ main ]
     paths:
     - 'Application/**'
-    - '.github/workflows/build-and-test.yml'
+    - '.github/workflows/ci.yml'
       
 jobs:
   build-and-test:
@@ -38,25 +38,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      #- name: Docker login     
-      #  run: docker login $registry -u ${{ secrets.ACR_USERNAME }} -p ${{ secrets.ACR_PASSWORD }}
-
-      #- name: Docker build
-      #  run: docker build -t $registry/$repository:$tag --build-arg build_version=$tag $dockerfile_path
-
-      #- name: Docker Push
-      #  run: docker push $registry/$repository:$tag
-       
-      #- name: Build and push Docker images
-      #  uses: docker/build-push-action@v1
-      #  with:
-      #    username: ${{ secrets.ACR_USERNAME }}
-      #    password: ${{ secrets.ACR_PASSWORD }}
-      #    registry: ${{ secrets.ACR_NAME }}
-      #    repository: wth/dotnetcore
-      #    dockerfile: ./Application/aspnet-core-dotnet-core/Dockerfile
-      #    tags: ${{ github.run_number }}
       
       - name: Azure Container Registry Login
         uses: Azure/docker-login@v1
@@ -66,13 +47,13 @@ jobs:
           # Container registry password
           password: ${{ secrets.ACR_PASSWORD }}
           # Container registry server url
-          login-server: ${{ secrets.ACR_NAME }}
+          login-server: $registryName
 
       - name: Docker build
-        run: docker build -t ${{ secrets.ACR_NAME }}/$repository:$tag --build-arg build_version=$tag $dockerfile_path
+        run: docker build -t $registryName/$repositoryName:$tag --build-arg build_version=$tag $dockerfilePath
 
       - name: Docker Push
-        run: docker push ${{ secrets.ACR_NAME }}/$repository:$tag
+        run: docker push $registryName/$repositoryName:$tag
         
       - uses: actions/github-script@0.9.0
         if: failure()
