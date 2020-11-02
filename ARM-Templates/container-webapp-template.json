@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "webAppName": {
-            "defaultValue": "kmg88devops-test",
+            "defaultValue": "kmg88devops-prod",
             "type": "String"
         },
         "hostingPlanName": {
