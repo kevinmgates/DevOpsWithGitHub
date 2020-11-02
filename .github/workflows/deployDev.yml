@@ -2,7 +2,7 @@ on:
   push:
     paths:
     - '.github/workflows/deployDev.yml'
-name: IaC
+name: IaC - Dev
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
