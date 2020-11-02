@@ -2,7 +2,7 @@ name: .NET Core
 
 env:
   registry: kmg88devopsreg.azurecr.io
-  repository: wth/dotnetcore
+  repository: wth/dotnetcoreapp
   dockerfile_path: Application/aspnet-core-dotnet-core
   tag: ${{github.run_number}} 
 
@@ -20,9 +20,7 @@ on:
       
 jobs:
   build-and-test:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
@@ -49,8 +47,7 @@ jobs:
 
       - name: Docker Push
         run: docker push $registry/$repository:$tag
-      
-        
+       
       - uses: actions/github-script@0.9.0
         if: failure()
         with:
