@@ -2,7 +2,7 @@ name: .NET Core
 
 env:
   registry: kmg88devopsreg.azurecr.io
-  repository: WTH/dotnetcore
+  repository: wth/dotnetcore
   docker_path: Application/aspnet-core-dotnet-core
 
 on:
