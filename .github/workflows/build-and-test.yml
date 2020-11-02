@@ -1,0 +1,27 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+    - 'Application/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+    - 'Application/**'
+
+jobs:
+  build-and-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+    - name: Install dependencies
+      run: dotnet restore ./Application/aspnet-core-dotnet-core/aspnet-core-dotnet-core.csproj
+    - name: Build
+      run: dotnet build ./Application/aspnet-core-dotnet-core/aspnet-core-dotnet-core.csproj --configuration Release --no-restore
+    - name: Test
+      run: dotnet test ./Application/aspnet-core-dotnet-core.UnitTests/aspnet-core-dotnet-core.UnitTests.csproj --no-restore --verbosity normal

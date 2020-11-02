@@ -1,4 +1,4 @@
-FROM microsoft/aspnetcore-build:1.1
+FROM microsoft/aspnetcore-build:3.1
 WORKDIR /app
 
 # Copy the published web app
