@@ -25,3 +25,26 @@ jobs:
       run: dotnet build ./Application/aspnet-core-dotnet-core/aspnet-core-dotnet-core.csproj --configuration Release --no-restore
     - name: Test
       run: dotnet test ./Application/aspnet-core-dotnet-core.UnitTests/aspnet-core-dotnet-core.UnitTests.csproj --no-restore --verbosity normal
+
+  docker-build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: kmg88devopsreg.azurecr.io/app:${{ GITHUB_RUN_NUMBER }}
