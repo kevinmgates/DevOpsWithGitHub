@@ -11,11 +11,13 @@ on:
     branches: [ main ]
     paths:
     - 'Application/**'
+    - '.github/workflows/build-and-test.yml'
   pull_request:
     branches: [ main ]
     paths:
     - 'Application/**'
-
+    - '.github/workflows/build-and-test.yml'
+      
 jobs:
   build-and-test:
 
