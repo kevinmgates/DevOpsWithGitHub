@@ -52,10 +52,10 @@ jobs:
         with:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
-          registry: $registry
-          repository: $repository
-          dockerfile: $dockerfile_path
-          tags: $tag
+          registry: kmg88devopsreg.azurecr.io
+          repository: wth/dotnetcore
+          dockerfile: Application/aspnet-core-dotnet-core
+          tags: ${{github.run_number}}
         
       - uses: actions/github-script@0.9.0
         if: failure()
