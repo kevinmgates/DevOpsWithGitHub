@@ -47,7 +47,7 @@ jobs:
           # Container registry password
           password: ${{ secrets.ACR_PASSWORD }}
           # Container registry server url
-          login-server: ${{ secrets.ACR_NAME }}
+          login-server: $registryName
 
       - name: Docker build
         run: docker build -t $registryName/$repositoryName:$tag --build-arg build_version=$tag $dockerfilePath
