@@ -2,8 +2,8 @@ name: CI
 
 env:
   registryName: kmg88devopsreg.azurecr.io
-  repositoryName: wth/dotnetcoreapp
-  dockerfilePath: Application/aspnet-core-dotnet-core
+  repositoryName: wth/aspnetapp
+  dockerfilePath: aspnetapp
   tag: ${{github.run_number}}
 
 on:

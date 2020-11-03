@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
  
     <RootNamespace>aspnet_core_dotnet_core.UnitTests</RootNamespace>
     <IsPackable>false</IsPackable>
