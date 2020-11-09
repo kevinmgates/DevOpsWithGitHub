@@ -61,7 +61,7 @@ jobs:
       - uses: azure/webapps-deploy@v2
         with:
           app-name: 'kmg88devops-test'
-          images: ${{secrets.ACR_NAME}}/wth/aspnetapp:${{github.run_number}}
+          images: ${{secrets.ACR_NAME}}/wth/razorcore:${{github.run_number}}
       
       - uses: actions/github-script@0.9.0
         if: failure()
