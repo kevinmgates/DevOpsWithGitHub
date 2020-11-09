@@ -2,8 +2,8 @@ name: CI
 
 env:
   registryName: kmg88devopsreg.azurecr.io
-  repositoryName: wth/aspnetapp
-  dockerfilePath: aspnetapp
+  repositoryName: wth/razorcore
+  dockerfilePath: Application/src/RazorPagesTestSample
   tag: ${{github.run_number}}
 
 on:
@@ -25,14 +25,12 @@ jobs:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 2.2
     - name: Install dependencies
-      run: dotnet restore ./Application/aspnet-core-dotnet-core/aspnet-core-dotnet-core.csproj
+      run: dotnet restore ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
     - name: Build
-      run: dotnet build ./Application/aspnet-core-dotnet-core/aspnet-core-dotnet-core.csproj --configuration Release --no-restore
+      run: dotnet build ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj --configuration Release --no-restore
     - name: Test
-      run: dotnet test ./Application/aspnet-core-dotnet-core.UnitTests/aspnet-core-dotnet-core.UnitTests.csproj --no-restore --verbosity normal
+      run: dotnet test ./Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj --no-restore --verbosity normal
 
   docker-build-and-push:
     runs-on: ubuntu-latest
