@@ -52,7 +52,17 @@ jobs:
 
       - name: Docker Push
         run: docker push ${{secrets.ACR_NAME}}/$repositoryName:$tag
-        
+      
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.WEBAPP_TEST_CREDS }}
+
+      - uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'kmg88devops-dev'
+          images: ${{secrets.ACR_NAME}}/wth/aspnetapp:${{github.run_number}}
+      
       - uses: actions/github-script@0.9.0
         if: failure()
         with:
