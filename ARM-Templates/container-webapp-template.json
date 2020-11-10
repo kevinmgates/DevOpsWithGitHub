@@ -3,11 +3,11 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "webAppName": {
-            "defaultValue": "kmg88devops-dev",
+            "defaultValue": "<prefix>devops-dev",
             "type": "String"
         },
         "hostingPlanName": {
-            "defaultValue": "kmg88devops-asp",
+            "defaultValue": "<prefix>devops-asp",
             "type": "String"
         },
         "appInsightsLocation": {
@@ -15,7 +15,7 @@
             "type": "String"
         },
         "appInsightsName": {
-            "defaultValue": "kmg88devops-ai",
+            "defaultValue": "<prefix>devops-ai",
             "type": "String"
         },        
         "sku": {
@@ -23,11 +23,11 @@
             "type": "String"
         },
         "registryName": {
-            "defaultValue": "kmg88devopsreg",
+            "defaultValue": "<prefix>devopsreg",
             "type": "String"
         },
         "imageName": {
-            "defaultValue": "kmg88devopsimage",
+            "defaultValue": "<prefix>devopsimage",
             "type":"String"
         },
         "registryLocation": {

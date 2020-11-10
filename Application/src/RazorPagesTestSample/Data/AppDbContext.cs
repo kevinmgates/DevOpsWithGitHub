@@ -67,9 +67,9 @@ namespace RazorPagesTestSample.Data
         {
             return new List<Message>()
             {
-                new Message(){ Text = "You're standing on my scarf." },
-                new Message(){ Text = "Would you like a jelly baby?" },
-                new Message(){ Text = "To the rational mind, nothing is inexplicable; only unexplained." }
+                new Message(){ Text = "The most powerful tool we have as developers is automation. — Scott Hanselman" },
+                new Message(){ Text = "Agile and DevOps are for harnessing integration, interaction, and innovation. ―  Pearl Zhu" },
+                new Message(){ Text = "To successfully implement continuous delivery, you need to change the culture of how an entire organization views software development efforts. – Tommy Tynjä" }
             };
         }
     }
