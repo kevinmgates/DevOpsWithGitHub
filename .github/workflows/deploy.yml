@@ -1,8 +1,17 @@
+name: IaC - All
+
 on:
+  workflow_dispatch:
+    inputs:
+      targetEnv:
+        description: 'Target environment: dev, test, prod'     
+        required: true
+        default: 'dev'
   push:
     paths:
     - '.github/workflows/deploy.yml'
-name: IaC - All
+      
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -23,7 +32,6 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: ./ARM-Templates/container-webapp-template.json
-        parameters: webAppName=kmg88devops-${{ secrets.targetEnv }}
+        parameters: webAppName=kmg88devops-${{ github.event.inputs.targetEnv }}"
 
-# TARGETENV set to "demo"
-# AZURE_RG set to "?"
+
