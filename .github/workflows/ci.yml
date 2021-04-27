@@ -110,3 +110,24 @@ jobs:
       with:
         app-name: 'kmg88devops-test'
         images: ${{secrets.ACR_NAME}}/wth/razorcore:${{github.run_number}}
+
+  deploy-to-prod:
+  
+    runs-on: ubuntu-latest
+    needs: deploy-to-test
+    environment:
+      name: prod
+      url: https://kmg88devops-prod.azurewebsites.net/
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.PROD_WEBAPP }}
+
+    - uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'kmg88devops-prod'
+        images: ${{secrets.ACR_NAME}}/wth/razorcore:${{github.run_number}}
