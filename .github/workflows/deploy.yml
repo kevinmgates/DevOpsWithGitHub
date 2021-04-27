@@ -1,4 +1,4 @@
-name: IaC - All
+name: IaC - Advanced
 
 on:
   workflow_dispatch:
