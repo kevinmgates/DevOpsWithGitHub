@@ -7,10 +7,6 @@ on:
         description: 'Target environment: dev, test, prod'     
         required: true
         default: 'dev'
-  push:
-    paths:
-    - '.github/workflows/deploy.yml'
-      
 
 jobs:
   build-and-deploy:
