@@ -6,13 +6,16 @@ on:
       targetEnv:
         description: 'Target environment: dev, test, prod'     
         required: true
-        default: 'dev'
+        default: 'dev'  
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
 
+  build-and-deploy:
+  
+    runs-on: ubuntu-latest
+    
+    steps:
+    
       # Checkout code
     - uses: actions/checkout@master
 
