@@ -76,7 +76,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: docker-build-and-push
     environment:
-      name: test
+      name: dev
       url: https://kmg88devops-dev.azurewebsites.net/
     
     steps:
