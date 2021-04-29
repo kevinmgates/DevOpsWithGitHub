@@ -1,10 +1,7 @@
 name: CI for PRs
 
 on:
-  pull_request:
-    branches: [ main ]
-    paths:
-    - '.github/workflows/ci-pr.yml'
+  workflow_dispatch:
       
 jobs:
 
