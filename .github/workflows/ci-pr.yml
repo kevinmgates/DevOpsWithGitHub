@@ -1,0 +1,36 @@
+name: CI for PRs
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+    - '.github/workflows/ci-pr.yml'
+      
+jobs:
+
+  pr-build-and-test:
+  
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+    - name: Install dependencies
+      run: dotnet restore ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
+    - name: Build
+      run: dotnet build ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj --configuration Release --no-restore
+    - name: Test
+      run: dotnet test ./Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj --no-restore --verbosity normal
+    - uses: actions/github-script@0.9.0
+      if: failure()
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          let body = "${{ env.build_name }} Worflow Failure \n Build Number: ${{ github.run_number }} \n Build Log: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} \n SHA: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }}) \n";
+          github.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: "${{ env.build_name }} Workflow ${{ github.run_number }} Failed! ",
+            body: body
+          });
