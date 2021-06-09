@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      # Checkout code
+      # Checkout the code
     - uses: actions/checkout@master
 
       # Log into Azure
