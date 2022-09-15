@@ -15,9 +15,7 @@ jobs:
           mkdir mydirname
 
       - name: Change dir
-        run: |
-          cd mydirname
+        run: cd mydirname
           
-      - name: LS dir
-        run: |
-          pwd
+      - name: pwd dir
+        run: pwd
