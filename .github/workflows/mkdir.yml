@@ -11,11 +11,10 @@ jobs:
 
     steps:
       - name: Create dir
-        run: |
-          mkdir mydirname
+        run: mkdir mydirname
 
       - name: Change dir
-        run: cd mydirname
+        run: ls -ls mydirname
           
       - name: pwd dir
         run: pwd
