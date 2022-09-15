@@ -13,5 +13,11 @@ jobs:
       - name: Create dir
         run: |
           mkdir mydirname
+
+      - name: Change dir
+        run: |
           cd mydirname
-          ls
+          
+      - name: LS dir
+        run: |
+          pwd
