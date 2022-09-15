@@ -17,4 +17,4 @@ jobs:
         run: ls -la mydirname
           
       - name: pwd dir
-        run: pwd
+        run: ls
