@@ -14,5 +14,4 @@ jobs:
         run: |
           mkdir mydirname
           cd mydirname
-          vim test.txt
           ls
